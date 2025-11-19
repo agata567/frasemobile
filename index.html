@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Letreiro Motivacional</title>
+  <style>
+    /* Definindo largura e altura da tela */
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;   /* Alinhamento horizontal */
+      align-items: center;       /* Alinhamento vertical */
+      height: 100vh;             /* Altura da tela */
+      width: 100vw;              /* Largura da tela */
+      background-color: #f0f0f0;
+    }
+
+    /* Área do letreiro */
+    .container {
+      position: relative;
+      width: 80%;         /* Espaço livre em torno do letreiro */
+      height: 100px;
+      border: 2px solid #333;
+      overflow: hidden;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Texto do letreiro */
+    .letreiro {
+      position: absolute;
+      font-size: 24px;
+      font-weight: bold;
+      color: #0077cc;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="letreiro">🌟 Acredite em você e vá além! 🌟</div>
+  </div>
+
+  <script>
+    const letreiro = document.querySelector('.letreiro');
+    const container = document.querySelector('.container');
+
+    let posX = 0;                 // Posição inicial
+    let direction = 1;            // 1 = direita, -1 = esquerda
+    const speed = 2;              // Controle da velocidade (px por frame)
+
+    function animar() {
+      const containerWidth = container.offsetWidth;
+      const textWidth = letreiro.offsetWidth;
+
+      posX += direction * speed;
+      letreiro.style.left = posX + 'px';
+
+      // Quando chega no limite direito, inverte direção
+      if (posX + textWidth >= containerWidth) {
+        direction = -1;
+      }
+      // Quando chega no limite esquerdo, inverte direção
+      if (posX <= 0) {
+        direction = 1;
+      }
+
+      requestAnimationFrame(animar);
+    }
+
+    animar();
+  </script>
+</body>
+</html>
